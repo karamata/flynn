@@ -16,7 +16,17 @@ import (
 	"github.com/boltdb/bolt"
 	"github.com/flynn/flynn/host/types"
 	"github.com/flynn/flynn/pkg/cluster"
+	"github.com/prometheus/client_golang/prometheus"
 )
+
+var runningJobMetric = prometheus.NewGauge(prometheus.GaugeOpts{
+	Name: "host_running_jobs",
+	Help: "Number of running jobs.",
+})
+
+func init() {
+	prometheus.MustRegister(runningJobMetric)
+}
 
 // TODO: prune old jobs?
 
@@ -423,6 +433,7 @@ func (s *State) SetStatusRunning(jobID string) {
 	job.StartedAt = time.Now().UTC()
 	job.Status = host.StatusRunning
 	s.sendEvent(job, host.JobEventStart)
+	runningJobMetric.Inc()
 	if err := s.Acquire(); err == nil {
 		s.persist(jobID)
 		s.Release()
@@ -449,6 +460,7 @@ func (s *State) SetStatusDone(jobID string, exitStatus int) {
 	}
 	job.PID = nil
 	s.sendEvent(job, host.JobEventStop)
+	runningJobMetric.Dec()
 	if err := s.Acquire(); err == nil {
 		s.persist(job.Job.ID)
 		s.Release()

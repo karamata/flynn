@@ -28,9 +28,9 @@ import (
 	"github.com/flynn/flynn/pkg/shutdown"
 	"github.com/flynn/flynn/pkg/version"
 	"github.com/flynn/go-docopt"
+	"github.com/inconshreveable/log15"
 	"github.com/opencontainers/runc/libcontainer"
 	_ "github.com/opencontainers/runc/libcontainer/nsenter"
-	"github.com/inconshreveable/log15"
 )
 
 const configFile = "/etc/flynn/host.json"
