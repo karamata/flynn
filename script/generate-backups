@@ -148,7 +148,7 @@ bootstrap_cluster() {
 
   info "bootstrapping ${version} cluster"
   export CLUSTER_DOMAIN="$(openssl rand -hex 16).local"
-  echo "192.0.2.200 ${CLUSTER_DOMAIN} controller.${CLUSTER_DOMAIN} git.${CLUSTER_DOMAIN} docker.${CLUSTER_DOMAIN}" | sudo tee -a /etc/hosts
+  echo "192.0.2.200 ${CLUSTER_DOMAIN} controller.${CLUSTER_DOMAIN} git.${CLUSTER_DOMAIN} docker.${CLUSTER_DOMAIN} tar.${CLUSTER_DOMAIN}" | sudo tee -a /etc/hosts
   "${ROOT}/script/kill-flynn"
   local cluster_add=$("${ROOT}/script/bootstrap-flynn" --version "${version}" &> >(tee "${out}") | tail -3 | head -1)
 

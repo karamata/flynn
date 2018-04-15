@@ -15,10 +15,6 @@ required = [
   name = "github.com/BurntSushi/toml"
 
 [[constraint]]
-  name = "github.com/Sirupsen/logrus"
-  version = "0.8.6"
-
-[[constraint]]
   branch = "master"
   name = "github.com/cupcake/jsonschema"
 

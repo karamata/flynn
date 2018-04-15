@@ -346,7 +346,7 @@ func (c *Cluster) CLIConfig() (*config.Config, error) {
 		Name:          "default",
 		ControllerURL: "https://controller." + c.ClusterDomain,
 		GitURL:        "https://git." + c.ClusterDomain,
-		DockerPushURL: "https://docker." + c.ClusterDomain,
+		TarURL:        "https://tar." + c.ClusterDomain,
 		Key:           c.ControllerKey,
 		TLSPin:        c.ControllerPin,
 	}
