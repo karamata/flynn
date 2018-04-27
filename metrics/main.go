@@ -28,6 +28,7 @@ type job struct {
 func main() {
 	jobs := []*job{
 		{"flynn-host", "/etc/prometheus/flynn-host.json"},
+		{"router-api", "/etc/prometheus/router-api.json"},
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
